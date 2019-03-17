@@ -1,47 +1,64 @@
-# **Finding Lane Lines on the Road** 
+#Finding Lane Lines on the Road
 
-## Writeup Template
-
-### You can use this file as a template for your writeup if you want to submit it as a markdown file. But feel free to use some other method and submit a pdf if you prefer.
-
----
-
-**Finding Lane Lines on the Road**
+Finding Lane Lines on the Road
 
 The goals / steps of this project are the following:
-* Make a pipeline that finds lane lines on the road
-* Reflect on your work in a written report
+
+Make a pipeline that finds lane lines on the road
+Reflect on your work in a written report
 
 
-[//]: # (Image References)
+My pipeline consisted of the following steps:
 
-[image1]: ./examples/grayscale.jpg "Grayscale"
-
----
-
-### Reflection
-
-### 1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
-
-My pipeline consisted of 5 steps. First, I converted the images to grayscale, then I .... 
-
-In order to draw a single line on the left and right lanes, I modified the draw_lines() function by ...
-
-If you'd like to include images to show how the pipeline works, here is how to include an image: 
-
-![alt text][image1]
+Reading the original image.
 
 
-### 2. Identify potential shortcomings with your current pipeline
+RGB Thresholding to get all the colours aboove yellow.
 
 
-One potential shortcoming would be what would happen when ... 
-
-Another shortcoming could be ...
+Gray scaling.
 
 
-### 3. Suggest possible improvements to your pipeline
+Gaussian Smoothing.
 
-A possible improvement would be to ...
 
-Another potential improvement could be to ...
+Canny Edge Detection.
+
+
+Region Of Interest Selection.
+
+
+Hough Transform Detection.
+
+
+Hough Transform Detection - with Solid lines
+
+
+Overlaying the detected lane(s) on top of the original image.
+
+
+Output Video(s) :
+
+solidWhiteRight.mp4
+solidYellowLeft.mp4
+challenge.mp4
+For the challenge video, I had to update the region of interest, I select only the region of the lanes i have two areas of interest in the image one area for left lane marker and another for the right lane marker.
+
+In order to draw a single line on the left and right lanes, I modified the draw_lines() function by :
+
+Categorizing the line segment(s) from hough transform within the region of interest, into left lane, or right lane, using the slope. ( > 0, or < 0).
+I use slope threshold to find lines with slopes between the thresholds to make sure i only have the lane lines. (m>0.45 and m<0.8-right_slope)
+I find the mean left and right slope from the all the available then compute x1 when y=Ymax and x2 when y=340 and  of image then draw line from (x1,Ymax) to (x2,340).
+
+Potential shortcomings:
+
+Currently towards the far end of the pipeline if there is a car within the region of interest, it shows up. I need to find a better way of excluding such objects from region of interest.
+The lane lines drawn jitter a lot due to the mean slope variation.
+The pipeline does't work for extremely curved roads 
+
+Potential improvements:
+
+Dynamic region of interest generation - currently this is hard coded.
+Draw lines functions need to be made smarter by connecting different hough lines unlike by taking mean slope like i implemented.
+The output can be smoothened further.
+Better handling of curved line(s).
