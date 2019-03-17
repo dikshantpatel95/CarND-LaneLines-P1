@@ -4,44 +4,54 @@ Finding Lane Lines on the Road
 
 The goals / steps of this project are the following:
 
-Make a pipeline that finds lane lines on the road
-Reflect on your work in a written report
+1. Make a pipeline that finds lane lines on the road
+2. Reflect on your work in a written report
 
 
 My pipeline consisted of the following steps:
 
-Reading the original image.
+Step1: Reading the original image.
+
+<img src="https://github.com/dikshantpatel95/CarND-LaneLines-P1/blob/master/test_images/solidWhiteCurve.jpg" width="450">
 
 
-RGB Thresholding to get all the colours aboove yellow.
+Step2: RGB Thresholding to get all the colours aboove yellow.
+
+<img src="https://github.com/dikshantpatel95/CarND-LaneLines-P1/blob/master/color_thresh_images/solidWhiteCurve.jpg" width="450">
 
 
-Gray scaling.
+Step3: Gray scaling.
+
+<img src="https://github.com/dikshantpatel95/CarND-LaneLines-P1/blob/master/grayscale_images/solidWhiteCurve.jpg" width="450">
 
 
-Gaussian Smoothing.
+Step4: Gaussian Smoothing.
+
+Step5: Canny Edge Detection and Region Of Interest Selection.
+I updated the region of interest, I select only the region of the lanes i have two areas of interest in the image one area for left lane marker and another for the right lane marker.
+
+<img src="https://github.com/dikshantpatel95/CarND-LaneLines-P1/blob/master/canny_images/solidWhiteCurve.jpg" width="450">
 
 
-Canny Edge Detection.
+Step6: Hough Transform Detection with overlay on original image.
+
+<img src="https://github.com/dikshantpatel95/CarND-LaneLines-P1/blob/master/output_images/no_pipeline/outputsolidwhite.jpg" width="450">
 
 
-Region Of Interest Selection.
+Step7: Hough Transform Detection - with Solid lines overlay on image
 
+<img src="https://github.com/dikshantpatel95/CarND-LaneLines-P1/blob/master/output_images/solid_lines/solidWhiteRight.jpg" width="450">
 
-Hough Transform Detection.
-
-
-Hough Transform Detection - with Solid lines
-
-
-Overlaying the detected lane(s) on top of the original image.
 
 
 Output Video(s) :
 
 solidWhiteRight.mp4
+
 solidYellowLeft.mp4
+
 challenge.mp4
+
 For the challenge video, I had to update the region of interest, I select only the region of the lanes i have two areas of interest in the image one area for left lane marker and another for the right lane marker.
 
 In order to draw a single line on the left and right lanes, I modified the draw_lines() function by :
